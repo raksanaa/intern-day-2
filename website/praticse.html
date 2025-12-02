@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Patient Medical Form</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        
+        .form-container {
+            background: linear-gradient(135deg, #f0f8ff, #e6f3ff);
+            margin: 20px;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .form-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #2c5aa0, #1e3d72, #2c5aa0);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c5aa0;
+            margin-bottom: 10px;
+            font-size: 36px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        h1::after {
+            content: '🏥';
+            font-size: 24px;
+            margin-left: 10px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: white;
+            margin: 40px 0 20px 0;
+            padding: 15px 20px;
+            background: linear-gradient(135deg, #2c5aa0, #1e3d72);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(44, 90, 160, 0.3);
+            position: relative;
+            transform: translateX(-10px);
+            transition: transform 0.3s ease;
+        }
+        
+        .section-title:hover {
+            transform: translateX(0);
+        }
+        
+        .section-title::before {
+            content: '📋';
+            margin-right: 10px;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            flex: 1;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #f8f9fa, #ffffff);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #e9ecef;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e0e6ed;
+            border-radius: 10px;
+            font-size: 15px;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+            background: #fafbfc;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            border-color: #2c5aa0;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(44, 90, 160, 0.1);
+            background: white;
+            transform: translateY(-2px);
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 8px;
+        }
+        
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: background 0.2s ease;
+        }
+        
+        .checkbox-item:hover {
+            background: #f0f7ff;
+        }
+        
+        .checkbox-item input {
+            width: auto;
+            margin: 0;
+        }
+        
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: background 0.2s ease;
+        }
+        
+        .radio-item:hover {
+            background: #f0f7ff;
+        }
+        
+        .radio-item input {
+            width: auto;
+            margin: 0;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            padding: 18px 40px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            width: 100%;
+            margin-top: 40px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .submit-btn::before {
+            content: '💾 ';
+            margin-right: 8px;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(40, 167, 69, 0.4);
+            background: linear-gradient(135deg, #20c997, #28a745);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(-1px);
+        }
+        
+        .button-row {
+            display: flex;
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .reset-btn {
+            background: linear-gradient(135deg, #dc3545, #c82333);
+            color: white;
+            padding: 18px 40px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            flex: 1;
+            transition: all 0.3s ease;
+        }
+        
+        .reset-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(220, 53, 69, 0.4);
+            background: linear-gradient(135deg, #c82333, #dc3545);
+        }
+        
+        .reset-btn:active {
+            transform: translateY(-1px);
+        }
+        
+        .required {
+            color: #e74c3c;
+            font-size: 16px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        
+        .form-group {
+            animation: fadeInUp 0.6s ease forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .form-group:nth-child(1) { animation-delay: 0.1s; }
+        .form-group:nth-child(2) { animation-delay: 0.2s; }
+        .form-group:nth-child(3) { animation-delay: 0.3s; }
+        .form-group:nth-child(4) { animation-delay: 0.4s; }
+        .form-group:nth-child(5) { animation-delay: 0.5s; }
+        
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #2c5aa0, #28a745);
+            z-index: 1000;
+            transition: width 0.3s ease;
+        }
+        
+        .vital-signs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid #dee2e6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2c5aa0, #1e3d72);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+        
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0 0 0;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+        
+        nav a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+        
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    <header>
+        <h1>Medical Center</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="praticse.html">Patient Form</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="form-container">
+        <div id="welcomeMessage" style="background: linear-gradient(135deg, #28a745, #20c997); color: white; padding: 15px; border-radius: 10px; margin-bottom: 20px; text-align: center; display: none;">
+            <h3 style="margin: 0;">Welcome back! 😊</h3>
+            <p style="margin: 5px 0 0 0;">Please complete your medical information below</p>
+        </div>
+        <h1>Patient Medical Information Form</h1>
+        <p class="subtitle">Complete Medical Assessment & Health Record</p>
+        
+        <form id="patientForm" onsubmit="submitForm(event)">
+            
+            <!-- 1. Patient Personal Information -->
+            <div class="section-title">1. Patient Personal Information</div>
+            
+            <div class="form-group">
+                <label for="fullName">Full Name <span class="required">*</span></label>
+                <input type="text" id="fullName" name="fullName" required>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="age">Age <span class="required">*</span></label>
+                    <input type="number" id="age" name="age" required min="1" max="120">
+                </div>
+                <div class="form-group">
+                    <label for="dob">Date of Birth <span class="required">*</span></label>
+                    <input type="date" id="dob" name="dob" required>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>Gender <span class="required">*</span></label>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <input type="radio" id="male" name="gender" value="male" required>
+                        <label for="male">Male</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="female" name="gender" value="female" required>
+                        <label for="female">Female</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="other" name="gender" value="other" required>
+                        <label for="other">Other</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="phone">Contact Number <span class="required">*</span></label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="address">Address <span class="required">*</span></label>
+                <textarea id="address" name="address" required></textarea>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="emergencyContact">Emergency Contact Name</label>
+                    <input type="text" id="emergencyContact" name="emergencyContact">
+                </div>
+                <div class="form-group">
+                    <label for="emergencyPhone">Emergency Contact Phone</label>
+                    <input type="tel" id="emergencyPhone" name="emergencyPhone">
+                </div>
+            </div>
+            
+            <!-- 2. Medical History -->
+            <div class="section-title">2. Medical History</div>
+            
+            <div class="form-group">
+                <label>Past Illnesses (Check all that apply)</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="diabetes" name="pastIllness" value="diabetes">
+                        <label for="diabetes">Diabetes</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="hypertension" name="pastIllness" value="hypertension">
+                        <label for="hypertension">Hypertension</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="heartDisease" name="pastIllness" value="heartDisease">
+                        <label for="heartDisease">Heart Disease</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="cancer" name="pastIllness" value="cancer">
+                        <label for="cancer">Cancer</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="asthma" name="pastIllness" value="asthma">
+                        <label for="asthma">Asthma</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="arthritis" name="pastIllness" value="arthritis">
+                        <label for="arthritis">Arthritis</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="surgeries">Surgeries (if any)</label>
+                <textarea id="surgeries" name="surgeries" placeholder="List any surgeries with dates"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="hospitalizations">Hospitalizations (if any)</label>
+                <textarea id="hospitalizations" name="hospitalizations" placeholder="List hospitalizations with dates and reasons"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="medications">Current Medications / Supplements</label>
+                <textarea id="medications" name="medications" placeholder="List all current medications and supplements"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="allergies">Allergies (food, medicine, others)</label>
+                <textarea id="allergies" name="allergies" placeholder="List all known allergies"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="familyHistory">Family Medical History</label>
+                <textarea id="familyHistory" name="familyHistory" placeholder="Family history of heart disease, diabetes, cancer, etc."></textarea>
+            </div>
+            
+            <!-- 3. Lifestyle Information -->
+            <div class="section-title">3. Lifestyle Information</div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="smoking">Smoking Status</label>
+                    <select id="smoking" name="smoking">
+                        <option value="">Select</option>
+                        <option value="never">Never</option>
+                        <option value="former">Former Smoker</option>
+                        <option value="current">Current Smoker</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="alcohol">Alcohol Consumption</label>
+                    <select id="alcohol" name="alcohol">
+                        <option value="">Select</option>
+                        <option value="never">Never</option>
+                        <option value="occasional">Occasional</option>
+                        <option value="regular">Regular</option>
+                        <option value="heavy">Heavy</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="exercise">Physical Activity / Exercise Habits</label>
+                <textarea id="exercise" name="exercise" placeholder="Describe your exercise routine and frequency"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="diet">Diet & Nutrition Habits</label>
+                <textarea id="diet" name="diet" placeholder="Describe your typical diet and eating habits"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="sleep">Sleep Patterns</label>
+                <textarea id="sleep" name="sleep" placeholder="Describe your sleep schedule and quality"></textarea>
+            </div>
+            
+            <!-- 4. Symptoms / Current Health Concerns -->
+            <div class="section-title">4. Symptoms / Current Health Concerns</div>
+            
+            <div class="form-group">
+                <label>General Symptoms (Check all that apply)</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="fatigue" name="symptoms" value="fatigue">
+                        <label for="fatigue">Fatigue</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="fever" name="symptoms" value="fever">
+                        <label for="fever">Fever</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="weightLoss" name="symptoms" value="weightLoss">
+                        <label for="weightLoss">Weight Loss</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="weightGain" name="symptoms" value="weightGain">
+                        <label for="weightGain">Weight Gain</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="pain" name="symptoms" value="pain">
+                        <label for="pain">Pain</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="nausea" name="symptoms" value="nausea">
+                        <label for="nausea">Nausea</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="specificConcerns">Specific Health Concerns</label>
+                <textarea id="specificConcerns" name="specificConcerns" placeholder="Describe any specific symptoms, pain, or health concerns"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="symptomDuration">Duration & Severity of Symptoms</label>
+                <textarea id="symptomDuration" name="symptomDuration" placeholder="How long have you had these symptoms? Rate severity 1-10"></textarea>
+            </div>
+            
+            <!-- 5. Vital Signs & Measurements -->
+            <div class="section-title">5. Vital Signs & Measurements</div>
+            
+            <div class="vital-signs">
+                <div class="form-group">
+                    <label for="height">Height (cm)</label>
+                    <input type="number" id="height" name="height" step="0.1">
+                </div>
+                <div class="form-group">
+                    <label for="weight">Weight (kg)</label>
+                    <input type="number" id="weight" name="weight" step="0.1">
+                </div>
+                <div class="form-group">
+                    <label for="bmi">BMI</label>
+                    <input type="number" id="bmi" name="bmi" step="0.1" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="bloodPressure">Blood Pressure</label>
+                    <input type="text" id="bloodPressure" name="bloodPressure" placeholder="120/80">
+                </div>
+                <div class="form-group">
+                    <label for="heartRate">Heart Rate (bpm)</label>
+                    <input type="number" id="heartRate" name="heartRate">
+                </div>
+                <div class="form-group">
+                    <label for="temperature">Temperature (°C)</label>
+                    <input type="number" id="temperature" name="temperature" step="0.1">
+                </div>
+            </div>
+            
+            <!-- 6. System-wise Checkup -->
+            <div class="section-title">6. System-wise Physical Examination</div>
+            
+            <div class="form-group">
+                <label for="generalExam">General Physical Examination</label>
+                <textarea id="generalExam" name="generalExam" placeholder="Skin, hair, nails, eyes, ears, mouth, throat examination notes"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="cardiovascular">Cardiovascular System</label>
+                <textarea id="cardiovascular" name="cardiovascular" placeholder="Heart sounds, circulation, peripheral pulses"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="respiratory">Respiratory System</label>
+                <textarea id="respiratory" name="respiratory" placeholder="Lung sounds, breathing pattern"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="gastrointestinal">Gastrointestinal System</label>
+                <textarea id="gastrointestinal" name="gastrointestinal" placeholder="Abdominal examination, liver, spleen"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="musculoskeletal">Musculoskeletal System</label>
+                <textarea id="musculoskeletal" name="musculoskeletal" placeholder="Joint movement, flexibility, muscle strength"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="nervous">Nervous System</label>
+                <textarea id="nervous" name="nervous" placeholder="Reflexes, coordination, sensory check"></textarea>
+            </div>
+            
+            <!-- 7. Laboratory Tests -->
+            <div class="section-title">7. Laboratory / Diagnostic Tests</div>
+            
+            <div class="form-group">
+                <label>Blood Tests (Check completed tests)</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="cbc" name="bloodTests" value="cbc">
+                        <label for="cbc">CBC</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="bloodSugar" name="bloodTests" value="bloodSugar">
+                        <label for="bloodSugar">Blood Sugar</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="lipidProfile" name="bloodTests" value="lipidProfile">
+                        <label for="lipidProfile">Lipid Profile</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="thyroid" name="bloodTests" value="thyroid">
+                        <label for="thyroid">Thyroid Function</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="otherTests">Other Tests (Urine, ECG, X-ray, Ultrasound)</label>
+                <textarea id="otherTests" name="otherTests" placeholder="List other diagnostic tests performed"></textarea>
+            </div>
+            
+            <!-- 8. Immunizations -->
+            <div class="section-title">8. Immunizations / Preventive Care</div>
+            
+            <div class="form-group">
+                <label for="vaccinations">Vaccination History</label>
+                <textarea id="vaccinations" name="vaccinations" placeholder="List recent vaccinations and dates"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="screenings">Screening Tests</label>
+                <textarea id="screenings" name="screenings" placeholder="Mammogram, pap smear, colonoscopy, etc."></textarea>
+            </div>
+            
+            <!-- 9. Doctor's Notes -->
+            <div class="section-title">9. Doctor's Observations / Recommendations</div>
+            
+            <div class="form-group">
+                <label for="doctorNotes">Doctor's Notes</label>
+                <textarea id="doctorNotes" name="doctorNotes" placeholder="Clinical observations and findings"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="followUp">Follow-up Advice</label>
+                <textarea id="followUp" name="followUp" placeholder="Follow-up recommendations and timeline"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="referrals">Referrals to Specialists</label>
+                <textarea id="referrals" name="referrals" placeholder="Specialist referrals if needed"></textarea>
+            </div>
+            
+            <div class="button-row">
+                <button type="submit" class="submit-btn">💾 Save Patient Record</button>
+                <button type="button" class="reset-btn" onclick="resetForm()">🔄 Reset Form</button>
+            </div>
+        </form>
+    </div>
+    
+    <footer>
+        <p>&copy; 2025 Medical Center. All rights reserved. | Privacy Policy | Terms of Service</p>
+    </footer>
+
+    <script>
+        // Auto-calculate BMI
+        document.getElementById('height').addEventListener('input', calculateBMI);
+        document.getElementById('weight').addEventListener('input', calculateBMI);
+        
+        function calculateBMI() {
+            const height = parseFloat(document.getElementById('height').value) / 100; // Convert cm to m
+            const weight = parseFloat(document.getElementById('weight').value);
+            
+            if (height > 0 && weight > 0) {
+                const bmi = (weight / (height * height)).toFixed(1);
+                document.getElementById('bmi').value = bmi;
+            }
+        }
+        
+        // Show welcome message if user is logged in
+        window.addEventListener('load', function() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+            if (currentUser.name) {
+                const welcomeMsg = document.getElementById('welcomeMessage');
+                welcomeMsg.style.display = 'block';
+                welcomeMsg.querySelector('h3').textContent = `Welcome back, ${currentUser.name}! 😊`;
+            }
+        });
+        
+        // Progress bar functionality
+        window.addEventListener('scroll', function() {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.body.offsetHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            document.getElementById('progressBar').style.width = scrollPercent + '%';
+        });
+        
+        function submitForm(event) {
+            event.preventDefault();
+            
+            // Add loading animation to button
+            const submitBtn = document.querySelector('.submit-btn');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = '🔄 Saving...';
+            submitBtn.disabled = true;
+            
+            const formData = new FormData(event.target);
+            const data = {};
+            
+            // Handle regular fields
+            for (let [key, value] of formData.entries()) {
+                if (data[key]) {
+                    if (Array.isArray(data[key])) {
+                        data[key].push(value);
+                    } else {
+                        data[key] = [data[key], value];
+                    }
+                } else {
+                    data[key] = value;
+                }
+            }
+            
+            // Handle checkboxes
+            data.pastIllness = formData.getAll('pastIllness');
+            data.symptoms = formData.getAll('symptoms');
+            data.bloodTests = formData.getAll('bloodTests');
+            
+            // Store patient record
+            const patients = JSON.parse(localStorage.getItem('patients') || '[]');
+            const patientRecord = {
+                ...data,
+                id: Date.now(),
+                recordDate: new Date().toISOString()
+            };
+            patients.push(patientRecord);
+            localStorage.setItem('patients', JSON.stringify(patients));
+            
+            // Simulate saving delay for better UX
+            setTimeout(() => {
+                submitBtn.textContent = '✓ Saved Successfully!';
+                submitBtn.style.background = 'linear-gradient(135deg, #28a745, #20c997)';
+                
+                setTimeout(() => {
+                    alert(`Patient Record Saved Successfully!\n\nPatient: ${data.fullName}\nRecord ID: ${patientRecord.id}\nDate: ${new Date().toLocaleDateString()}`);
+                    
+                    event.target.reset();
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                    submitBtn.style.background = 'linear-gradient(135deg, #28a745, #20c997)';
+                }, 1000);
+            }, 1500);
+        }
+        
+        function resetForm() {
+            if (confirm('⚠️ Are you sure you want to reset all form data? This action cannot be undone.')) {
+                document.getElementById('patientForm').reset();
+                document.getElementById('bmi').value = '';
+                
+                // Reset button animation
+                const resetBtn = document.querySelector('.reset-btn');
+                const originalText = resetBtn.textContent;
+                resetBtn.textContent = '✓ Form Reset!';
+                resetBtn.style.background = 'linear-gradient(135deg, #28a745, #20c997)';
+                
+                setTimeout(() => {
+                    resetBtn.textContent = originalText;
+                    resetBtn.style.background = 'linear-gradient(135deg, #dc3545, #c82333)';
+                }, 2000);
+                
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+    </script>
+</body>
+</html>

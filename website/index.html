@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Medical Center - Home</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2c5aa0, #1e3d72);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        header h1 {
+            margin: 0;
+            font-size: 36px;
+            font-weight: 700;
+        }
+        
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 15px 0 0 0;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 6px;
+            transition: all 0.3s;
+        }
+        
+        nav a:hover, nav a.active {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+        
+        .hero-section {
+            text-align: center;
+            padding: 80px 20px;
+            color: white;
+        }
+        
+        .hero-section h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero-section p {
+            font-size: 20px;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .cta-btn {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            padding: 16px 32px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 18px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(40, 167, 69, 0.4);
+        }
+        
+        .cta-btn.secondary {
+            background: linear-gradient(135deg, #2c5aa0, #1e3d72);
+        }
+        
+        .cta-btn.secondary:hover {
+            box-shadow: 0 8px 25px rgba(44, 90, 160, 0.4);
+        }
+        
+        .features-section {
+            background: white;
+            margin: 40px 20px;
+            padding: 60px 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .feature-card {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 15px;
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+        
+        .feature-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .feature-card h3 {
+            color: #2c5aa0;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        
+        .stats-section {
+            background: linear-gradient(135deg, #2c5aa0, #1e3d72);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            max-width: 800px;
+            margin: 40px auto 0;
+        }
+        
+        .stat-item {
+            padding: 20px;
+        }
+        
+        .stat-number {
+            font-size: 48px;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .emergency-banner {
+            background: linear-gradient(135deg, #dc3545, #c82333);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+        
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #28a745;
+        }
+    </style>
+</head>
+<body>
+    <div class="emergency-banner">
+        🚨 EMERGENCY? CALL 911 or (555) 123-HELP - 24/7 Emergency Services Available! 🚨
+    </div>
+
+    <header>
+        <h1>🏥 Medical Center</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero-section">
+        <h2>Your Health, Our Priority</h2>
+        <p>Experience world-class healthcare with compassionate care, cutting-edge technology, and a team of dedicated medical professionals committed to your wellness.</p>
+        
+        <div class="cta-buttons">
+            <a href="login.html" class="cta-btn">🩺 Patient Portal</a>
+            <a href="contact.html" class="cta-btn secondary">📞 Book Appointment</a>
+        </div>
+    </section>
+
+    <section class="features-section">
+        <div class="features-grid">
+            <div class="feature-card">
+                <span class="feature-icon">👨‍⚕️</span>
+                <h3>Expert Medical Team</h3>
+                <p>Our board-certified physicians and specialists provide comprehensive care across all medical disciplines with years of experience and dedication.</p>
+            </div>
+            
+            <div class="feature-card">
+                <span class="feature-icon">🏥</span>
+                <h3>Modern Facilities</h3>
+                <p>State-of-the-art medical equipment and comfortable facilities designed to provide the best possible care experience for our patients.</p>
+            </div>
+            
+            <div class="feature-card">
+                <span class="feature-icon">⚡</span>
+                <h3>24/7 Emergency Care</h3>
+                <p>Round-the-clock emergency services with rapid response times and immediate access to critical care when you need it most.</p>
+            </div>
+            
+            <div class="feature-card">
+                <span class="feature-icon">💊</span>
+                <h3>Comprehensive Services</h3>
+                <p>From preventive care to specialized treatments, we offer a full range of medical services under one roof for your convenience.</p>
+            </div>
+            
+            <div class="feature-card">
+                <span class="feature-icon">📱</span>
+                <h3>Digital Health Records</h3>
+                <p>Secure, accessible digital health records that allow you to manage your health information and communicate with your care team.</p>
+            </div>
+            
+            <div class="feature-card">
+                <span class="feature-icon">❤️</span>
+                <h3>Patient-Centered Care</h3>
+                <p>Personalized treatment plans focused on your individual needs, preferences, and health goals for optimal outcomes.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats-section">
+        <h2>Trusted by Thousands</h2>
+        <p>Our commitment to excellence is reflected in our track record of successful patient outcomes and community trust.</p>
+        
+        <div class="stats-grid">
+            <div class="stat-item">
+                <span class="stat-number">50,000+</span>
+                <span>Patients Served</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">25+</span>
+                <span>Years of Excellence</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">100+</span>
+                <span>Medical Professionals</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">98%</span>
+                <span>Patient Satisfaction</span>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="login.html">Patient Portal</a>
+                <a href="contact.html">Contact Us</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+            <p>&copy; 2025 Medical Center. All rights reserved. | Committed to Your Health & Wellness</p>
+            <p>📍 123 Healthcare Boulevard, Medical District | 📞 (555) 123-4567 | 📧 info@medicalcenter.com</p>
+        </div>
+    </footer>
+</body>
+</html>
