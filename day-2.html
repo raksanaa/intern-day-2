@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cricket Player Videos</title>
+    <style>
+        a.player-link {
+            font-size: 22px;
+            display: block;
+            margin: 10px 0;
+            text-decoration: none;
+            color: blue;
+            cursor: pointer;
+        }
+
+        a.player-link:hover {
+            text-decoration: underline;
+            color: darkred;
+        }
+
+        /* Make sure the marquee stays at the bottom */
+        .bottom-marquee {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #f0f0f0;
+            padding: 10px 0;
+        }
+
+        .bottom-marquee img {
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Normal Links -->
+<a href="https://www.google.com" target="_blank">Open Google</a><br>
+<a href="https://www.youtube.com" target="_blank">Open YouTube</a><br><br>
+
+<h2>Click a Player Name to Watch the Video</h2>
+
+<!-- Dhoni Link -->
+<a class="player-link" onclick="playVideo('https://www.youtube.com/embed/MR93QcFBVug')">
+    Dhoni
+</a>
+
+<!-- Virat Link -->
+<a class="player-link" onclick="playVideo('https://www.youtube.com/embed/cLiOWyMK_E8')">
+    Virat Kohli
+</a>
+
+<br><br>
+
+<!-- Video Player -->
+<iframe id="videoPlayer" width="1080" height="607" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+</iframe>
+
+<!-- Marquee scrolling image at the bottom -->
+<div class="bottom-marquee">
+    <marquee behavior="scroll" direction="up" scrollamount="2" loop="infinite">
+        <img src="https://picsum.photos/200/150" alt="Scrolling Image">
+    </marquee>
+</div>
+
+<script>
+function playVideo(url) {
+    document.getElementById("videoPlayer").src = url;
+}
+
+</script>
+<tr>
+    <th>S.no</th>
+    <th>Name<th>
+    <th>age</th>
+    <th>country</th>
+    <th>role</th>
+    <th>batting style</th>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>MS Dhoni</td>
+    <td>42</td>
+    <td>India</td>
+    <td>Wicketkeeper Batsman</td>
+    <td>Right-hand bat</td>
+    
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>Virat Kohli</td>
+    <td>35</td>
+    <td>India</td>
+    <td>Top-order Batsman</td>
+    <td>Right-hand bat</td>
+   
+  </tr>
+</table>
+</body>
+</html>
+
